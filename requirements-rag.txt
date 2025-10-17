@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Dependencias adicionales sólo si se habilita RAG local
+pypdf>=4.2.0
+sentence-transformers>=2.7.0
+numpy>=1.26.0

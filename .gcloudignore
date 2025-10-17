@@ -1,0 +1,71 @@
+# Git files
+.git
+.gitignore
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[cod]
+*$py.class
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Local development
+.env
+*.env
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation (excepto README principal para referencia)
+README_*.md
+RESUMEN_*.md
+SOLUCION_*.md
+CHECKLIST_*.md
+ESTRUCTURA_*.md
+INICIO_*.md
+LEEME_*.md
+INDEX.txt
+docs/
+
+# Scripts de desarrollo
+deploy.sh
+deploy-cloudrun.sh
+deploy-cloudrun.ps1
+
+# Test files
+tests/
+*_test.py
+test_*.py
+
+# Archivos temporales
+*.bak
+*.old
+*.tmp
+*.swp
+*.swo

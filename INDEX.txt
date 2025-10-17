@@ -1,0 +1,153 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║   🚀 BACKEND DJANGO - CLOUD RUN                                          ║
+║   ✅ Carpeta Organizada y Lista para Desplegar                           ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📦 BACKEND/
+│
+├─ 📘 DOCUMENTACIÓN (8 archivos, ~35 KB)
+│  │
+│  ├─ ⚡ INICIO_RAPIDO.md             [3.1 KB] ← EMPIEZA AQUÍ
+│  ├─ 📖 README.md                    [9.8 KB] ← Guía completa
+│  ├─ 📁 ESTRUCTURA_ORGANIZADA.md     [6.5 KB] ← Estructura de archivos
+│  ├─ ⭐ RESUMEN_SOLUCION.md          [3.4 KB] ← Qué se cambió
+│  ├─ 🔧 SOLUCION_CLOUD_RUN.md        [4.9 KB] ← Guía técnica
+│  ├─ ✅ CHECKLIST_DEPLOYMENT.md      [5.0 KB] ← Lista verificación
+│  ├─ 💻 README_LOCAL_DEV.md          [---  ] ← Desarrollo local
+│  └─ 🤖 README_RAG.md                [2.6 KB] ← Sistema RAG
+│
+├─ 🚀 DESPLIEGUE (4 archivos)
+│  │
+│  ├─ deploy-cloudrun.ps1             ← EJECUTAR ESTE (Windows)
+│  ├─ deploy-cloudrun.sh              ← Ejecutar este (Linux/Mac)
+│  ├─ cloudbuild.yaml                 ← Config Cloud Build
+│  └─ deploy.sh                       ← Script legacy
+│
+├─ 🐳 DOCKER (3 archivos)
+│  │
+│  ├─ Dockerfile                      ← Configuración Docker
+│  ├─ entrypoint.sh                   ← Script inicio (mejorado)
+│  └─ wait_for_db.sh                  ← Verificación BD
+│
+├─ 📦 DEPENDENCIAS (2 archivos)
+│  │
+│  ├─ requirements.txt                ← Deps principales
+│  └─ requirements-rag.txt            ← Deps RAG (opcional)
+│
+├─ ⚙️ CONFIGURACIÓN (3 archivos)
+│  │
+│  ├─ .env.example                    ← Ejemplo env vars
+│  ├─ env.example                     ← (duplicado)
+│  └─ .gcloudignore                   ← Archivos ignorar GCloud
+│
+└─ 📂 SRC/ (Código fuente Django)
+   │
+   ├─ manage.py
+   │
+   ├─ config/                         ⚙️ Configuración Django
+   │  ├─ settings.py                  ✏️ (puerto BD corregido)
+   │  ├─ urls.py
+   │  ├─ views.py                     (health checks)
+   │  └─ wsgi.py
+   │
+   ├─ auth_app/                       🔐 Autenticación
+   │  ├─ models.py                    (CustomUser, Profile)
+   │  ├─ views.py                     (login, register, profile)
+   │  ├─ urls.py
+   │  └─ migrations/
+   │
+   ├─ chat_app/                       💬 Chat con IA
+   │  ├─ models.py                    (Chat, Message)
+   │  ├─ views.py                     (chat endpoints)
+   │  ├─ ai_service.py                (Google AI)
+   │  ├─ urls.py
+   │  └─ migrations/
+   │
+   ├─ plans_app/                      📝 Planificaciones
+   │  ├─ models.py                    (Plan, Planificacion)
+   │  ├─ views.py                     (CRUD)
+   │  ├─ urls.py
+   │  └─ migrations/
+   │
+   ├─ rag_proxy/                      🤖 RAG (opcional)
+   │  ├─ views.py
+   │  ├─ ingest.py
+   │  ├─ retrieval.py
+   │  ├─ urls.py
+   │  ├─ docs/                        (PDFs)
+   │  └─ management/commands/
+   │
+   └─ templates/                      🎨 Templates
+      └─ status.html
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  📊 ESTADÍSTICAS                                                          ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  Total archivos raíz:     20 archivos                                     ║
+║  Documentación:           8 archivos MD (~35 KB)                          ║
+║  Scripts despliegue:      3 scripts                                       ║
+║  Apps Django:             4 apps (auth, chat, plans, rag)                 ║
+║  Carpetas duplicadas:     0 ✅ (eliminadas)                               ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  🎯 INICIO RÁPIDO                                                         ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║  1️⃣  Lee:      INICIO_RAPIDO.md                                          ║
+║  2️⃣  Ejecuta:  .\deploy-cloudrun.ps1                                     ║
+║  3️⃣  Verifica: curl .../healthz                                          ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  ✅ CAMBIOS APLICADOS                                                     ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  ✏️  settings.py         → Puerto BD: 3307 → 3306                        ║
+║  ✏️  entrypoint.sh       → Logging mejorado, manejo errores              ║
+║  ✏️  cloudbuild.yaml     → PORT=8080, ALLOWED_HOSTS                      ║
+║  ✨  deploy-cloudrun.ps1 → Script Windows (NUEVO)                        ║
+║  ✨  README.md           → Documentación completa (NUEVO)                ║
+║  ✨  8 archivos MD       → Documentación completa (NUEVOS)               ║
+║  🗑️  backend/backend/    → Carpeta duplicada (ELIMINADA)                ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  🌐 URLS IMPORTANTES                                                      ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  API:      https://backend-django-79197934609.us-central1.run.app        ║
+║  Health:   https://backend-django-79197934609.us-central1.run.app/healthz║
+║  API v1:   https://backend-django-79197934609.us-central1.run.app/api/v1/║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  📚 ORDEN DE LECTURA RECOMENDADO                                          ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  1. INICIO_RAPIDO.md          ⚡ Para empezar YA                         ║
+║  2. README.md                 📘 Guía completa del proyecto              ║
+║  3. ESTRUCTURA_ORGANIZADA.md  📁 Entender la estructura                  ║
+║  4. RESUMEN_SOLUCION.md       ⭐ Qué se cambió y por qué                 ║
+║  5. SOLUCION_CLOUD_RUN.md     🔧 Si tienes problemas                     ║
+║  6. CHECKLIST_DEPLOYMENT.md   ✅ Antes/después despliegue               ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  🎉 ESTADO FINAL                                                          ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  ✅ Carpeta backend completamente organizada                             ║
+║  ✅ Sin carpetas duplicadas (backend/backend/ eliminada)                 ║
+║  ✅ Todos los archivos consolidados                                       ║
+║  ✅ Documentación completa (8 archivos MD)                                ║
+║  ✅ Scripts de despliegue listos (PS1 + SH)                               ║
+║  ✅ Código corregido (puerto BD, entrypoint, etc.)                        ║
+║  ✅ Estructura clara y profesional                                        ║
+║                                                                           ║
+║  🟢 LISTO PARA DESPLEGAR                                                  ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+Creado: 17 de octubre, 2025
+Versión: 2.0 - Estructura Consolidada y Organizada
+═══════════════════════════════════════════════════════════════════════════════
