@@ -22,12 +22,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY requirements-rag.txt ./
 RUN if [ "$ENABLE_RAG" = "1" ]; then \
       echo "[BUILD] Instalando dependencias RAG" && \
-      pip install --no-cache-dir -r requirements-rag.txt ; \
+      pip install --no-cache-dir -r requirements-rag.txt && \
+      echo "[BUILD] Pre-descargando modelo de embeddings..." && \
+      python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')" ; \
     else \
       echo "[BUILD] RAG deshabilitado (no se instalan dependencias pesadas)" ; \
     fi
 
 COPY src ./src
+COPY public ./public
 COPY entrypoint.sh /entrypoint.sh
 COPY wait_for_db.sh /app/wait_for_db.sh
 RUN sed -i 's/\r$//' /entrypoint.sh /app/wait_for_db.sh \

@@ -8,7 +8,7 @@ API_KEY = os.environ.get("GEMINI_API_KEY")
 # Si no existe, evitamos inicializar el cliente para no fallar en tests o dev sin clave.
 client = genai.Client() if os.environ.get("GEMINI_API_KEY") else None
 
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash-exp")
 # Si quieres desactivar "thinking" por costo/latencia, usa 0 (recomendado para respuestas rápidas)
 THINKING_BUDGET = int(os.environ.get("GEMINI_THINKING_BUDGET", "0"))
 

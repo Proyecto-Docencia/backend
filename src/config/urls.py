@@ -11,7 +11,7 @@ api_v1_patterns = [
     path('rag/', include('rag_proxy.urls')),
 ]
 
- urlpatterns = [
+urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
 

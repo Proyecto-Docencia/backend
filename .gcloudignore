@@ -51,7 +51,7 @@ ESTRUCTURA_*.md
 INICIO_*.md
 LEEME_*.md
 INDEX.txt
-docs/
+/docs/
 
 # Scripts de desarrollo
 deploy.sh

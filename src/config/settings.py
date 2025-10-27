@@ -1,9 +1,14 @@
 import os
 from pathlib import Path
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 from typing import Any, Dict
 
 # Cargar variables desde env/.env si existe
 try:
+# --- Gemini IA API Key ---
+# Para habilitar Gemini IA, define la variable de entorno GEMINI_API_KEY en tu entorno de despliegue.
+# Ejemplo en Cloud Run:
+# --set-env-vars="GEMINI_API_KEY=AIzaSyAaBzjJ7nqxMtBd9GvTvAnGeTO7YQzbhIk"
     from dotenv import load_dotenv  # type: ignore
     # Intentar primero ruta montada en contenedor /app/env/.env
     candidate_paths = [
@@ -38,6 +43,7 @@ INSTALLED_APPS = [
     'auth_app',
     'plans_app',
     'chat_app',
+    'rag_proxy',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +162,11 @@ CORS_ALLOWED_ORIGINS: list[str] = [] if _cors_allow_all_final else _cors_allowed
 CSRF_TRUSTED_ORIGINS: list[str] = _csrf_trusted_list
 
 CORS_ALLOW_CREDENTIALS = True
+
+# Configuración de cookies para cross-origin (necesario para frontend en dominio diferente)
+SESSION_COOKIE_SECURE = not DEBUG  # True en producción (HTTPS)
+SESSION_COOKIE_SAMESITE = 'None' if not DEBUG else 'Lax'  # None permite cross-origin con HTTPS
+SESSION_COOKIE_HTTPONLY = True  # Protección XSS
+CSRF_COOKIE_SECURE = not DEBUG  # True en producción (HTTPS)
+CSRF_COOKIE_SAMESITE = 'None' if not DEBUG else 'Lax'  # None permite cross-origin con HTTPS
+CSRF_COOKIE_HTTPONLY = False  # JavaScript debe leer CSRF token
